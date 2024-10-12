@@ -13,7 +13,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "./lib/index.ts"),
       name: appPackage.name,
-      fileName: format => `index.${format}.js`,
+      fileName: format => `lobox-selectbox.${format}.js`,
     },
     rollupOptions: {
       external: ["react", "react-dom", "react/jsx-runtime"],

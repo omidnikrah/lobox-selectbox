@@ -6,7 +6,7 @@ import { OptionItem } from "./types";
 
 import styles from "./styles.module.scss";
 
-interface SelectBoxProviderProps {
+export interface SelectBoxProviderProps {
   children: ReactNode;
   name: string;
   options: OptionItem[];

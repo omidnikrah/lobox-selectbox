@@ -1,6 +1,20 @@
-import { createContext, useContext } from "react";
+import { ChangeEvent, createContext, KeyboardEvent, useContext } from "react";
 
-import type { SelectBoxContextProps } from "./types";
+import { OptionItem } from "./types";
+
+interface SelectBoxContextProps {
+  isOpen: boolean;
+  searchValue: string;
+  selectedOptions: string[];
+  options: OptionItem[];
+  filteredOptions: OptionItem[];
+  handleToggle: () => void;
+  handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleSearchInputKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
+  handleOptionClick: (option: OptionItem) => void;
+  handleAddNewItem: () => void;
+  handleKeyDown: (event: KeyboardEvent<HTMLElement>) => void;
+}
 
 export const SelectBoxContext = createContext<SelectBoxContextProps | undefined>(undefined);
 

@@ -1,7 +1,7 @@
 import { jsxs as p, jsx as c } from "react/jsx-runtime";
-import { createContext as A, useContext as B, forwardRef as O, createElement as w, useRef as E, useEffect as R, useState as f, useMemo as j } from "react";
-const k = A(void 0), m = () => {
-  const e = B(k);
+import { createContext as I, useContext as A, forwardRef as O, createElement as w, useRef as B, useEffect as q, useState as b, useMemo as E } from "react";
+const k = I(void 0), m = () => {
+  const e = A(k);
   if (!e)
     throw new Error("SelectBox components must be used within a SelectBox.Root");
   return e;
@@ -15,7 +15,7 @@ function S(e) {
   } else for (n in e) e[n] && (o && (o += " "), o += n);
   return o;
 }
-function T() {
+function R() {
   for (var e, t, n = 0, o = "", s = arguments.length; n < s; n++) (e = arguments[n]) && (t = S(e)) && (o && (o += " "), o += t);
   return o;
 }
@@ -25,14 +25,14 @@ function T() {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const $ = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), D = (...e) => e.filter((t, n, o) => !!t && o.indexOf(t) === n).join(" ");
+const T = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), j = (...e) => e.filter((t, n, o) => !!t && o.indexOf(t) === n).join(" ");
 /**
  * @license lucide-react v0.452.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-var V = {
+var $ = {
   xmlns: "http://www.w3.org/2000/svg",
   width: 24,
   height: 24,
@@ -49,7 +49,7 @@ var V = {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const M = O(
+const V = O(
   ({
     color: e = "currentColor",
     size: t = 24,
@@ -63,12 +63,12 @@ const M = O(
     "svg",
     {
       ref: u,
-      ...V,
+      ...$,
       width: t,
       height: t,
       stroke: e,
       strokeWidth: o ? Number(n) * 24 / Number(t) : n,
-      className: D("lucide", s),
+      className: j("lucide", s),
       ...i
     },
     [
@@ -83,12 +83,12 @@ const M = O(
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const N = (e, t) => {
+const D = (e, t) => {
   const n = O(
-    ({ className: o, ...s }, r) => w(M, {
+    ({ className: o, ...s }, r) => w(V, {
       ref: r,
       iconNode: t,
-      className: D(`lucide-${$(e)}`, o),
+      className: j(`lucide-${T(e)}`, o),
       ...s
     })
   );
@@ -100,29 +100,29 @@ const N = (e, t) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const q = N("Check", [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]]);
+const M = D("Check", [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]]);
 /**
  * @license lucide-react v0.452.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const P = N("ChevronDown", [
+const P = D("ChevronDown", [
   ["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]
-]), W = "_selectbox__wrapper_ev1up_1", Z = "_selectbox__trigger_ev1up_8", z = "_selectbox__options_ev1up_44", G = "_selectbox__option_ev1up_44", a = {
+]), W = "_selectbox__wrapper_1fejq_1", Z = "_selectbox__trigger_1fejq_9", z = "_selectbox__options_1fejq_45", G = "_selectbox__option_1fejq_45", a = {
   selectbox__wrapper: W,
   selectbox__trigger: Z,
-  "selectbox__trigger-icon": "_selectbox__trigger-icon_ev1up_12",
-  "selectbox__search-input": "_selectbox__search-input_ev1up_26",
+  "selectbox__search-input": "_selectbox__search-input_1fejq_19",
+  "selectbox__trigger-icon": "_selectbox__trigger-icon_1fejq_31",
   selectbox__options: z,
   selectbox__option: G,
-  "selectbox__option--selected": "_selectbox__option--selected_ev1up_67"
+  "selectbox__option--selected": "_selectbox__option--selected_1fejq_68"
 }, H = ({ option: e }) => {
   const { selectedOptions: t, handleOptionClick: n, handleKeyDown: o } = m(), s = t.includes(e.value);
   return /* @__PURE__ */ p(
     "li",
     {
-      className: T(a.selectbox__option, {
+      className: R(a.selectbox__option, {
         [a["selectbox__option--selected"]]: s
       }),
       onClick: () => n(e),
@@ -132,7 +132,7 @@ const P = N("ChevronDown", [
       "aria-selected": s ? "true" : "false",
       children: [
         e.label,
-        s && /* @__PURE__ */ c(q, { width: 16, height: 16 })
+        s && /* @__PURE__ */ c(M, { width: 16, height: 16 })
       ]
     }
   );
@@ -154,8 +154,8 @@ const P = N("ChevronDown", [
     t.map((s) => /* @__PURE__ */ c(H, { option: s }, s.value))
   ] }) : null;
 }, Q = (e) => {
-  const t = E(null);
-  return R(() => {
+  const t = B(null);
+  return q(() => {
     const n = (o) => {
       t.current && !t.current.contains(o.target) && e();
     };
@@ -164,28 +164,28 @@ const P = N("ChevronDown", [
     };
   }, [e]), t;
 }, U = ({ children: e, options: t, onAddNewItem: n }) => {
-  const [o, s] = f(!1), [r, _] = f(""), [i, u] = f([]), x = Q(() => {
+  const [o, s] = b(!1), [r, _] = b(""), [i, u] = b([]), x = Q(() => {
     s(!1);
-  }), h = j(() => t.filter(
+  }), h = E(() => t.filter(
     (l) => l.label.toLowerCase().includes(r.toLowerCase()) || l.value.toLowerCase().includes(r.toLowerCase())
-  ), [t, r]), v = () => s((l) => !l), K = (l) => {
+  ), [t, r]), C = () => s((l) => !l), N = (l) => {
     o || s(!0), _(l.target.value);
-  }, L = (l) => {
+  }, K = (l) => {
     if (l.key === "Enter" && r) {
-      const d = t.find((b) => b.value === r);
-      d ? C(d) : y();
+      const d = t.find((f) => f.value === r);
+      d ? v(d) : y();
     }
-  }, C = (l) => {
+  }, v = (l) => {
     if (i.includes(l.value)) {
-      const d = i.filter((b) => b !== l.value);
+      const d = i.filter((f) => f !== l.value);
       u(d);
     } else
       u([...i, l.value]);
     s(!1);
   }, y = () => {
     n({ value: r, label: r }), u([...i, r]), _(""), s(!1);
-  }, I = (l) => {
-    (l.key === "Enter" || l.key === " ") && (v(), l.preventDefault());
+  }, L = (l) => {
+    (l.key === "Enter" || l.key === " ") && (C(), l.preventDefault());
   };
   return /* @__PURE__ */ c(
     k.Provider,
@@ -196,12 +196,12 @@ const P = N("ChevronDown", [
         selectedOptions: i,
         options: t,
         filteredOptions: h,
-        handleToggle: v,
-        handleSearchChange: K,
-        handleSearchInputKeyDown: L,
-        handleOptionClick: C,
+        handleToggle: C,
+        handleSearchChange: N,
+        handleSearchInputKeyDown: K,
+        handleOptionClick: v,
         handleAddNewItem: y,
-        handleKeyDown: I
+        handleKeyDown: L
       },
       children: /* @__PURE__ */ c(
         "div",

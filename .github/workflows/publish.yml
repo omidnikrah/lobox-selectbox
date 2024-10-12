@@ -1,0 +1,75 @@
+name: Publish Package
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build the package
+        run: yarn build
+
+      - name: Bump version and release
+        id: semantic_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx semantic-release | tee semantic_release_output.txt
+          if grep -q "Published release" semantic_release_output.txt; then
+            echo "NEW_VERSION_RELEASED=true" >> $GITHUB_ENV
+          else
+            echo "NEW_VERSION_RELEASED=false" >> $GITHUB_ENV
+          fi
+        continue-on-error: true
+
+      - name: Set npm registry and auth token for npmjs
+        if: ${{ env.NEW_VERSION_RELEASED == 'true' }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
+      - name: Publish to npm
+        if: ${{ env.NEW_VERSION_RELEASED == 'true' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn publish --access public --non-interactive
+
+      - name: Temporarily add scope for GitHub Packages
+        if: ${{ env.NEW_VERSION_RELEASED == 'true' }}
+        run: |
+          mv package.json package.json.bak
+          jq '.name = "@omidnikrah/" + .name' package.json.bak > package.json
+
+      - name: Set npm registry for GitHub Packages
+        if: ${{ env.NEW_VERSION_RELEASED == 'true' }}
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_TOKEN }}" > .npmrc
+          cat .npmrc # Output .npmrc for debugging purposes
+
+      - name: Check modified package.json
+        if: ${{ env.NEW_VERSION_RELEASED == 'true' }}
+        run: cat package.json
+
+      - name: Publish to GitHub Packages
+        if: ${{ env.NEW_VERSION_RELEASED == 'true' }}
+        run: yarn publish --registry https://npm.pkg.github.com/ --access public --non-interactive
+
+      - name: Restore original package.json
+        if: ${{ env.NEW_VERSION_RELEASED == 'true' }}
+        run: mv package.json.bak package.json

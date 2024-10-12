@@ -26,15 +26,22 @@ module.exports = {
     "import/order": [
       "error",
       {
-        "newlines-between": "always",
-        pathGroups: [
-          {
-            pattern: "@src/assets/**",
-            group: "object",
-            position: "after",
-          },
+        "groups": [
+          "builtin",
+          "external",
+          ["parent", "sibling", "index"]
         ],
-      },
-    ],
+        "pathGroups": [
+          {
+            "pattern": "./*.scss",
+            "group": "index",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ]
   },
 };

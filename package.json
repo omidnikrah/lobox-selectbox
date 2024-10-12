@@ -9,6 +9,9 @@
   "files": [
     "dist"
   ],
+  "sideEffects": [
+    "*.scss"
+  ],
   "author": {
     "name": "Omid Nikrah",
     "email": "omidnikrah@gmail.com",

@@ -1,5 +1,5 @@
 import { useClickOutside } from "@lib/hooks";
-import { useState, useMemo, ChangeEvent, KeyboardEvent, ReactNode } from "react";
+import { useState, useMemo, ChangeEvent, KeyboardEvent, ReactNode, useEffect } from "react";
 
 import { SelectBoxContext } from "./SelectboxContext";
 import { OptionItem } from "./types";
@@ -9,17 +9,25 @@ import styles from "./styles.module.scss";
 export interface SelectBoxProviderProps {
   children: ReactNode;
   name: string;
+  defaultValue?: string[];
   options: OptionItem[];
   onAddNewItem: (option: OptionItem) => void;
+  onChange?: (option: OptionItem) => void;
 }
 
-export const SelectboxRoot = ({ children, options, onAddNewItem }: SelectBoxProviderProps) => {
+export const SelectboxRoot = ({ children, defaultValue, options, onAddNewItem, onChange }: SelectBoxProviderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const selectRef = useClickOutside<HTMLDivElement>(() => {
     setIsOpen(false);
   });
+
+  useEffect(() => {
+    if (defaultValue) {
+      setSelectedOptions(defaultValue);
+    }
+  }, [defaultValue]);
 
   const filteredOptions = useMemo(() => {
     return options.filter(
@@ -54,11 +62,14 @@ export const SelectboxRoot = ({ children, options, onAddNewItem }: SelectBoxProv
     } else {
       setSelectedOptions([...selectedOptions, option.value]);
     }
+    onChange?.(option);
     setIsOpen(false);
   };
 
   const handleAddNewItem = () => {
-    onAddNewItem({ value: searchValue, label: searchValue });
+    const newItem = { value: searchValue, label: searchValue };
+    onAddNewItem(newItem);
+    onChange?.(newItem);
     setSelectedOptions([...selectedOptions, searchValue]);
     setSearchValue("");
     setIsOpen(false);

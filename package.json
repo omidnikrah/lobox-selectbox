@@ -74,14 +74,11 @@
     "vite": "^5.4.8",
     "vite-plugin-dts": "^4.2.4",
     "vite-tsconfig-paths": "^5.0.1",
-    "wrap-ansi": "7.0.0"
+    "wrap-ansi": "^9.0.0"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "lucide-react": "^0.452.0"
-  },
-  "resolutions": {
-    "wrap-ansi": "7.0.0"
   },
   "lint-staged": {
     "{src,lib}/**/*.{js,ts,tsx}": [

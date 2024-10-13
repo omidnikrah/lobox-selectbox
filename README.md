@@ -16,12 +16,30 @@ The **SelectBox Component** is a fully accessible, customizable, and searchable 
 
 ## Installation
 
-To install the component, run the following command:
+### From NPM
+
+To install the component via NPM, run the following command:
 
 ```bash
 npm install lobox-selectbox
 # or
 yarn add lobox-selectbox
+```
+
+### From GitHub Packages
+
+To install the package from GitHub Packages, add the following to your `.npmrc` file (if not already present):
+
+```bash
+@omidnikrah:registry=https://npm.pkg.github.com
+```
+
+Then run:
+
+```bash
+npm install @omidnikrah/lobox-selectbox
+# or
+yarn add @omidnikrah/lobox-selectbox
 ```
 
 ## Usage

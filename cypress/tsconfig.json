@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["es6", "dom"],
+    "strict": true,
+    "types": ["cypress"] // Add cypress types here
+  },
+  "include": [
+    "../node_modules/cypress",
+    "e2e/**/*.ts" // Include your Cypress tests here
+  ]
+}

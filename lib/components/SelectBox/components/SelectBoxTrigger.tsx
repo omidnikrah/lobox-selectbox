@@ -16,6 +16,7 @@ export const SelectBoxTrigger = () => {
       tabIndex={0}
       aria-expanded={isOpen ? "true" : "false"}
       onKeyDown={handleKeyDown}
+      data-testid="selectbox-trigger"
     >
       <input
         type="text"
@@ -26,6 +27,7 @@ export const SelectBoxTrigger = () => {
         onKeyDown={handleSearchInputKeyDown}
         aria-autocomplete="none"
         aria-controls="selectbox__options"
+        data-testid="selectbox-input"
       />
       <ChevronDown className={styles["selectbox__trigger-icon"]} width={20} height={20} />
     </div>

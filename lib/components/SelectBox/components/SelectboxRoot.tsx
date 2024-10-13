@@ -15,7 +15,14 @@ export interface SelectBoxProviderProps {
   onChange?: (option: OptionItem) => void;
 }
 
-export const SelectboxRoot = ({ children, defaultValue, options, onAddNewItem, onChange }: SelectBoxProviderProps) => {
+export const SelectboxRoot = ({
+  children,
+  name,
+  defaultValue,
+  options,
+  onAddNewItem,
+  onChange,
+}: SelectBoxProviderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -106,7 +113,9 @@ export const SelectboxRoot = ({ children, defaultValue, options, onAddNewItem, o
         aria-haspopup="listbox"
         aria-owns="selectbox__options"
         aria-controls="selectbox__options"
+        data-testid="selectbox-wrapper"
       >
+        <input type="hidden" name={name} value={selectedOptions.join(",")} data-testid="selectbox-hidden-input" />
         {children}
       </div>
     </SelectBoxContext.Provider>

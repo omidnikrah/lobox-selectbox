@@ -24,6 +24,7 @@ export const SelectBoxOption = ({ option }: SelectBoxOptionProps) => {
       tabIndex={0}
       role="option"
       aria-selected={isSelected ? "true" : "false"}
+      data-testid={`selectbox-option-${option.value}`}
     >
       {option.label}
       {isSelected && <Check width={16} height={16} />}

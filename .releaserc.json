@@ -33,8 +33,7 @@
       {
         "assets": [
           "CHANGELOG.md",
-          "package.json",
-          "dist"
+          "package.json"
         ],
         "message": "💥 chore: v${nextRelease.version} [skip ci]"
       }
